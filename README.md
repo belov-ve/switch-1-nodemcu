@@ -2,10 +2,10 @@
 Switch 1 relay on NodeMCU platform (Lua)
 ---
 ### Directory structure:
-    \*.lc - lua bytecode file
+    \*.lc - lua bytecode file (for esp8266)
     \*.lua - lua files
     \lua\* - project source files
-    \web\* - web server files (*.lch - lua bytecode modules for web server services)
+    \web\* - web server files (*.lch - lua bytecode modules for web server services (esp8266))
     \web\lua\* - web server service source files
     \firmware\* - NodeMCU custom build
     \schematic\* - electric scheme
