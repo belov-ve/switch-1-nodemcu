@@ -1,6 +1,6 @@
 --[[
  Кнопки и индикаторы управления
- ver 1.0
+ ver 1.0.1
 --]]
 
 do
@@ -45,25 +45,14 @@ do
         local function pressBtn(n)
             local pressLongTime = 5000000   -- 5 сек. принимать как длинное нажатие
             local last                      -- переменная для отслеживания длительности нажатия кнопик
-            local lastlev                    -- перемнная - последнее состояние
+            local lastlev                   -- перемнная - последнее состояние
 
             return function (level, when, count)
                 -- print("Start pressBtn(). level="..level.."\twhen="..when.."\tcount="..count.."\tlastlev="..(lastlev or "-"))
 
-                if last and lastlev and (lastlev == level) then
-                    -- print("....Button chatter")
-                    if count > 1 then lastlev= nil end
-                    return      -- дребезг
-                end
 
-                lastlev = level
-                if not last then last = when end
-
-                if level == 0 then  -- нажатие btn
-
-                    last = when
-
-                    ---- Обработка нажатия
+                -- Функция обработки короткого нажатия кнопки
+                local function shortPressBtn()
                     -- переключаем реле
                     if Switch[n] then
                         local data = (gpio.read(Switch[n].pin) == Switch[n].on) and Switch[n].off or Switch[n].on
@@ -80,20 +69,47 @@ do
                     end
 
                     CF.doluafile("publishMQTT")        -- публикация state устройства
-
-                elseif level == 1 then -- отпускание btn
-                    local _t = (when - last)/1000000
-                    -- print("Time press: ".._t.." sec.")
-
-                    if when - last < pressLongTime then return end
-
-                    -- Тут можно разместить код обслуживания длительного нажатия
-                    do
-                        -- print("!!! Long press....reload")
-                        node.restart()
-                    end
-                    --
+                    return
                 end
+
+                    if last and lastlev and (lastlev == level) then
+                        -- print("....Button chatter")
+                        if count > 1 then lastlev = nil end
+                        return      -- дребезг
+                    end
+
+                    lastlev = level
+                    if not last then last = when end
+
+                    if level == 0 then  -- нажатие btn
+
+                        last = when
+
+                    -- При нажатии кнопки
+                        if Switch[n] and Config.switch[n].change and Config.switch[n].change == 'down' then
+                            shortPressBtn()
+                        end
+
+                    elseif level == 1 then -- отпускание btn
+                        local _t = (when - last)/1000000
+                        -- print("Time press: ".._t.." sec.")
+
+                        if when - last < pressLongTime then
+                            -- При отпускании кнопки (по умолчанию)
+                            if Switch[n] and (not Config.switch[n].change or Config.switch[n].change == 'up') then
+                                shortPressBtn()
+                            end
+
+                            return
+                        end
+
+                        -- Тут можно разместить код обслуживания длительного нажатия
+                        do
+                            -- print("!!! Long press....reload")
+                            node.restart()
+                        end
+                        --
+                    end
 
             end
         end

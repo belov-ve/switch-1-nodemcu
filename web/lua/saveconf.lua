@@ -71,6 +71,11 @@ do
             Config.switch[1].default = post.sw1_boot
         end
 
+    --    print(post.sw1_change)
+        if post.sw1_change then
+            Config.switch[1].change = post.sw1_change
+        end
+
     --    print(post.icon)
         if post.icon then
             Config.switch[1].icon = post.icon:gsub(mt, "%1")

@@ -82,11 +82,11 @@ value="<?lua return Config.network.sta.ssid or ' ' ?>">
 <div class="group s3 of-m1 m6 os-l1 l4">
 <select id="wifi_mode" name="wifi_mode" autocomplete="off">
 <option <?lua return Config.network.sta.setphymode=='PHYMODE_B' and 'selected' or '' ?>
-    value="PHYMODE_B">802.11b</option>
+value="PHYMODE_B">802.11b</option>
 <option <?lua return Config.network.sta.setphymode=='PHYMODE_G' and 'selected' or '' ?>
-    value="PHYMODE_G">802.11g</option>
+value="PHYMODE_G">802.11g</option>
 <option <?lua return Config.network.sta.setphymode=='PHYMODE_N' and 'selected' or '' ?>
-    value="PHYMODE_N">802.11n</option>
+value="PHYMODE_N">802.11n</option>
 </select>
 <label for="wifi_mode">Mode:</label>
 </div>
@@ -142,48 +142,58 @@ document.getElementById(v).removeAttribute('readonly')
 <div id="dswitch" class="hide">
 <h4>Switch 1</h4>
 <div class="row">
-<div class="group s3 of-m1 m2 os-l1 l2">
+<div class="group s4 of-m1 m2 os-l1 l2">
 <select id="sw1_boot" name="sw1_boot" autocomplete="off">
 <option <?lua return Config.switch[1].default=='on' and 'selected' or '' ?>
-    value="on">ON</option>
+value="on">On</option>
 <option <?lua return Config.switch[1].default=='off' and 'selected' or '' ?>
-    value="off">OFF</option>
+value="off">Off</option>
 <option <?lua return Config.switch[1].default=='last' and 'selected' or '' ?>
-    value="last">LAST</option>
+value="last">Last</option>
 </select>
 <label for="sw1_boot">On boot:</label>
+</div>
+
+<div class="group s4 m2 l2">
+<select id="sw1_change" name="sw1_change" autocomplete="off">
+<option <?lua return Config.switch[1].change=='up' and 'selected' or '' ?>
+value="up">Up</option>
+<option <?lua return Config.switch[1].change=='down' and 'selected' or '' ?>
+value="down">Down</option>
+</select>
+<label for="wifi_mode">Change when:</label>
 </div>
 
 <div class="group s8 m5 l4">
 <div class="search">
 <input id="icon" value="<?lua return Config.switch[1].icon or '' ?>" required=" " type="text"
-    name="icon" autocomplete="off">
+name="icon" autocomplete="off">
 <label for="icon">Icon:</label>
 <input id="select" type="submit" value="Select" onclick="searchIcon()">
 <ul id="icon_list" class="hide">
-    <li>mdi:electric-switch</li>
-    <li>mdi:light-switch</li>
-    <li>mdi:tumble-dryer</li>
-    <li>mdi:ceiling-light</li>
-    <li>mdi:lightbulb</li>
-    <li>mdi:power-socket-de</li>
-    <li>mdi:power-standby</li>
+<li>mdi:electric-switch</li>
+<li>mdi:light-switch</li>
+<li>mdi:tumble-dryer</li>
+<li>mdi:ceiling-light</li>
+<li>mdi:lightbulb</li>
+<li>mdi:power-socket-de</li>
+<li>mdi:power-standby</li>
 </ul>
 </div>
 </div>
 <script lang="JavaScript" type="text/javascript">
 function searchIcon() {
 if (document.getElementById('icon_list').classList.contains('hide')) {
-    document.getElementById('select').value = 'Close';
+document.getElementById('select').value = 'Close';
 } else {
-    document.getElementById('select').value = 'Select';
+document.getElementById('select').value = 'Select';
 }
 document.getElementById('icon_list').classList.toggle("hide");
 }
 {
 ul = document.getElementById('icon_list');
 ul.onclick = function (event) {
-    document.getElementById('icon').value = event.target.innerHTML;
+document.getElementById('icon').value = event.target.innerHTML;
 }
 }
 </script>
@@ -424,6 +434,9 @@ conf.gw = document.getElementById('gw').value
 if (document.getElementById('sw1_boot').value != undefined) {
 conf.sw1_boot = document.getElementById('sw1_boot').value
 };
+if (document.getElementById('sw1_change').value != undefined) {
+conf.sw1_change = document.getElementById('sw1_change').value
+};
 if (document.getElementById('icon').value != undefined) {
 conf.icon = document.getElementById('icon').value
 };
@@ -441,7 +454,7 @@ var _mq = ['mqtt_1', 'mqtt_2', 'mqtt_3'];
 var mq = [];
 _mq.forEach(el => {
 if (document.getElementById(el).value != undefined) {
-    mq[mq.length] = document.getElementById(el).value;
+mq[mq.length] = document.getElementById(el).value;
 }
 })
 if (mq.length > 0) {

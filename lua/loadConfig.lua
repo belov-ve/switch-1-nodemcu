@@ -25,6 +25,7 @@ do
                 {
                     "default" : "last",
                     "state" : "off",
+                    "change" : "up",
                     "icon" : "mdi:electric-switch"
                 }
             ],
