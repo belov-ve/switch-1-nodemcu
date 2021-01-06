@@ -7,10 +7,14 @@ Switch 1 relay on NodeMCU platform (Lua)
     \lua\* - project source files
     \web\* - web server files (*.lch - lua bytecode modules for web server services (esp8266))
     \web\lua\* - web server service source files
+    \ha\ui-lovelace.yaml - sample form UI (for ui-lovelace.yaml)
+    \ha\packages\drying_shoes.yaml - sample integration into HA in the form of packages 
     \firmware\* - NodeMCU custom build
     \schematic\* - electric scheme
 ### Note
-    All files \ *.lc, \init.lua and \web\*.* copied to the root of the ESP module
+    1) All files \ *.lc, \init.lua and \web\*.* copied to the root of the ESP module
+    2) Copy \ha\packages\drying_shoes.yaml into packages of Home Assistant. Set the required sensor name
+    3) Insert lines from \ha\ui-lovelace.yaml into ui-lovelace.yaml (also set the required sensor name)
 ---
 ### Sample data integration in Home Assistant
 with friendly name set in 'drying_shoes' and node.chip_id equal '6120123'
