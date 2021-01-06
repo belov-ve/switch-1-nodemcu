@@ -17,43 +17,45 @@
 
 <div id="loader" class="loader hide"></div>
 <ul class="nav fix info" id="topNav">
+<li><a href="#" class="brand">
+<?lua return Config.name ?></a></li>
 <li onclick="showDiv('dnode')"><a>Node</a></li>
 <li onclick="showDiv('dnetwork')"><a>Network</a></li>
 <li onclick="showDiv('dswitch')"><a>Switch</a></li>
 <li onclick="showDiv('dmqtt')"><a>MQTT</a></li>
 <li onclick="showDiv('dhass')"><a>Hass</a></li>
-
 <li class="-icon left">
 <a href="#" onclick="document.getElementById('topNav').classList.toggle('res');">&equiv;</a>
 </li>
 </ul>
 
 <div class="cont">
+<div class="of-s1 of-m1 of-l2">
 <!-- node -->
 <div id="dnode" class="hide">
 <div class="row">
-<div class="group of-m1 of-l1 s5 m5 l4">
+<div class="group s11 m5 l5">
 <label for="t1">Model:</label>
 <input type="text" name="t1" value="<?lua return Model ?>" readonly>
 </div>
 
-<div class="group s4 m3 l2">
+<div class="group s11 m3 l3">
 <label for="t2">Model version:</label>
 <input type="text" name="t2" value="<?lua return ModelVersion ?>" readonly>
 </div>
 
-<div class="group s3 m2 l2">
+<div class="group s11 m2 l2">
 <label for="t3">Manufacturer:</label>
 <input type="text" name="t3" value="<?lua return ModelManufacturer ?>" readonly>
 </div>
 </div>
 <div class="row">
-<div class="group of-m1 of-l1 s5 m5 l4">
+<div class="group s11 m5 l5">
 <label for="t4">Name:</label>
 <input type="text" name="t4" id="name" value="<?lua return Config.name ?>" readonly>
 </div>
 
-<div class="group s7 m5 l4">
+<div class="group s11 m5 l5">
 <label for="friendly_name">Friendly name:</label>
 <input id="friendly_name" type="text" name="friendly_name" autocomplete="off"
 value="<?lua return Config.friendly_name ?>">
@@ -63,23 +65,25 @@ value="<?lua return Config.friendly_name ?>">
 
 <!-- network -->
 <div id="dnetwork" class="hide">
+<br/>
+<div class="of-m1 of-l1">
 <div class="row">
-<div class="group s8 of-m1 m6 os-l1 l4">
+<div class="group s10 m6 l4">
 <input id="wifi_id" name="wifi_id" type="text" required autocomplete="off"
 value="<?lua return Config.network.sta.ssid or ' ' ?>">
-<label for="wifi_id">Имя (SSID):</label>
+<label for="wifi_id">SSID:</label>
 </div>
 </div>
 
 <div class="row">
-<div class="group s8 of-m1 m6 os-l1 l4">
+<div class="group s10 m6 l4">
 <input type="password" id="sta_pwd" name="sta_pwd" value="" autocomplete="off">
 <label for="sta_pwd">Password:</label>
 </div>
 </div>
 
 <div class="row">
-<div class="group s3 of-m1 m6 os-l1 l4">
+<div class="group s10 m6 l4">
 <select id="wifi_mode" name="wifi_mode" autocomplete="off">
 <option <?lua return Config.network.sta.setphymode=='PHYMODE_B' and 'selected' or '' ?>
 value="PHYMODE_B">802.11b</option>
@@ -91,16 +95,19 @@ value="PHYMODE_N">802.11n</option>
 <label for="wifi_mode">Mode:</label>
 </div>
 </div>
+</div>
 
 <div class="row">
-<div class="checkbox s3 of-m1 m2 of-l1 l2">
-<input type="checkbox" class="checkbox" id="dhcp" autocomplete="off" onchange="chkboxDhcp(this)">
+<div class="checkbox s10 of-m1 m7 of-l1 l2">
+<input type="checkbox" class="checkbox" id="dhcp" autocomplete="off"
+onchange="chkboxDhcp(this)">
 <label for="dhcp">DHCP</label>
 </div>
 </div>
 
+<div class="of-m2 of-l2">
 <div class="row">
-<div class="group of-s3 s5 m4 l2">
+<div class="group s10 m7 l5">
 <input id="ip" type="text" name="ip" autocomplete="off"
 value="<?lua return Config.network.sta.ip or '' ?>">
 <label for="ip">IP:</label>
@@ -108,7 +115,7 @@ value="<?lua return Config.network.sta.ip or '' ?>">
 </div>
 
 <div class="row">
-<div class="group of-s3 s5 m4 l2">
+<div class="group s10 m7 l5">
 <input type="text" id="mask" name="mask" autocomplete="off"
 value="<?lua return Config.network.sta.netmask or '' ?>">
 <label for="mask">NETMASK:</label>
@@ -116,10 +123,11 @@ value="<?lua return Config.network.sta.netmask or '' ?>">
 </div>
 
 <div class="row">
-<div class="group of-s3 s5 m4 l2">
+<div class="group s10 m7 l5">
 <input type="text" id="gw" name="gw" autocomplete="off"
 value="<?lua return Config.network.sta.gateway or '' ?>">
 <label for="gw">GATEWAY:</label>
+</div>
 </div>
 </div>
 </div>
@@ -140,9 +148,11 @@ document.getElementById(v).removeAttribute('readonly')
 
 <!-- switch -->
 <div id="dswitch" class="hide">
-<h4>Switch 1</h4>
+<br/>
+<h4 class="of-m1 of-l1">Switch №1</h4>
 <div class="row">
-<div class="group s4 of-m1 m2 os-l1 l2">
+<div class="group of-m1 of-l1 s6 m2 l2">
+<!--div class="group s11 m5 l5" -->
 <select id="sw1_boot" name="sw1_boot" autocomplete="off">
 <option <?lua return Config.switch[1].default=='on' and 'selected' or '' ?>
 value="on">On</option>
@@ -154,7 +164,7 @@ value="last">Last</option>
 <label for="sw1_boot">On boot:</label>
 </div>
 
-<div class="group s4 m2 l2">
+<div class="group s6 m2 l2">
 <select id="sw1_change" name="sw1_change" autocomplete="off">
 <option <?lua return Config.switch[1].change=='up' and 'selected' or '' ?>
 value="up">Up</option>
@@ -164,10 +174,10 @@ value="down">Down</option>
 <label for="wifi_mode">Change when:</label>
 </div>
 
-<div class="group s8 m5 l4">
+<div class="group s12 m5 l4">
 <div class="search">
-<input id="icon" value="<?lua return Config.switch[1].icon or '' ?>" required=" " type="text"
-name="icon" autocomplete="off">
+<input id="icon" value="<?lua return Config.switch[1].icon or '' ?>" required=" "
+type="text" name="icon" autocomplete="off">
 <label for="icon">Icon:</label>
 <input id="select" type="submit" value="Select" onclick="searchIcon()">
 <ul id="icon_list" class="hide">
@@ -203,8 +213,9 @@ document.getElementById('icon').value = event.target.innerHTML;
 
 <!-- mqtt -->
 <div id="dmqtt" class="hide">
+<div class="of-m1 of-l1">
 <div class="row">
-<div class="checkbox s3 of-m1 m2 of-l1 l2">
+<div class="checkbox s11 m4 l3">
 <input id="mqtt" name="mqtt" type="checkbox" class="checkbox" autocomplete="off"
 onchange="chkboxMqtt(this)">
 <label for="mqtt">MQTT</label>
@@ -212,19 +223,19 @@ onchange="chkboxMqtt(this)">
 </div>
 
 <div class="row">
-<div class="group of-s3 s3 m2 l2">
+<div class="group s11 m4 l3">
 <input type="text" id="mqtt_user" name="mqtt_user" autocomplete="off" required value="">
 <label for="mqtt_user">User:</label>
 </div>
 
-<div class="group s3 m2 l2">
+<div class="group s11 m4 l3">
 <input type="password" id="mqtt_pwd" name="mqtt_pwd" autocomplete="off" required value="">
 <label for="mqtt_pwd">Password:</label>
 </div>
 </div>
 
 <div class="row">
-<div class="group of-s3 s5 m4 l3">
+<div class="group of-m1 s11 m6 l4">
 <input type="text" id="mqtt_1" name="mqtt_1" autocomplete="off" required
 value="<?lua return Config.mqtt.server[1] or '' ?>">
 <label for="mqtt1">Server:</label>
@@ -232,24 +243,25 @@ value="<?lua return Config.mqtt.server[1] or '' ?>">
 </div>
 
 <div class="row">
-<div class="of-s3 s5 m4 l3">
+<div class="s11 of-m1 m6 l4">
 <input type="text" id="mqtt_2" name="mqtt_2" autocomplete="off"
 value="<?lua return Config.mqtt.server[2] or '' ?>">
 </div>
 </div>
 
 <div class="row">
-<div class="of-s3 s5 m4 l3">
+<div class="s11 of-m1 m6 l4">
 <input type="text" id="mqtt_3" name="mqtt_3" autocomplete="off"
 value="<?lua return Config.mqtt.server[3] or '' ?>">
 </div>
 </div>
 
 <div class="row">
-<div class="group of-s3 s5 m4 l2">
+<div class="group of-s1 of-m2 s10 m3 l2">
 <input type="text" id="mqtt_port" name="mqtt_port" autocomplete="off" required
 value="<?lua return Config.mqtt.port or '' ?>">
 <label for="mqtt_port">Port:</label>
+</div>
 </div>
 </div>
 </div>
@@ -286,10 +298,11 @@ document.getElementById(v).setAttribute('readonly', true)
 </div>
 
 <div class="row">
-<div class="group of-s3 s9 m5 l3">
+<div class="group of-m2 s11 m6 l4">
 <input type="text" id="dp" name="dp" autocomplete="off" required
 value="<?lua return Config.ha.discovery_prefix or '' ?>">
 <label for="dp">Discovery prefix:</label>
+</div>
 </div>
 </div>
 </div>

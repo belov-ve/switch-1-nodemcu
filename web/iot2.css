@@ -80,9 +80,18 @@ a {
  margin-left: auto;
  margin-bottom: 5em;
  margin-top: 3.3rem;
- padding-right: 2rem;
- padding-left: 2rem
- }
+ padding-right: 0.1rem;
+ padding-left: 0.1rem
+}
+
+.cont1 {  
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 5em;
+  margin-top: 3.3rem;
+  padding-right: 2rem;
+  padding-left: 2rem
+}
 
  .row {
   padding: 0 10px;
@@ -554,6 +563,7 @@ a {
 
 .nav li a.brand {
  font-weight: bold;
+ text-align: left;
  margin-right: 20px;
  margin-left: 40px;
 }
@@ -578,7 +588,7 @@ a {
  .-exit {
  float: none !important;
  }
- .nav li {
+ .nav li:not(:first-child) {
  display: none;
  }
  .nav li.-icon {
@@ -600,7 +610,6 @@ a {
  }
  .nav.res li a {
  display: block;
- text-align: left;
  }
 }
 
@@ -700,6 +709,7 @@ input[type="text"],
 input[type="number"],
 input[type="password"] {
  font-size: 1.0em;
+ display: inline;
  -moz-appearance: textfield;
  -moz-padding-start: 13px;
 }
@@ -810,33 +820,24 @@ select:active {
  outline: 0
 }
 
-input[type="text"],
-input[type="number"],
-input[type="password"]
-{
-  display: inline;
-}
-
 input:focus {
  outline: 0
 }
 
 select + label {
-  font-weight: normal;
   position: absolute;
   left: 10px;
-  top: -22px;
+  top: -24px;
 }
 
 input[type="text"] + label,
 input[type="number"] + label,
 input[type="password"] + label,
 input[type="color"] + label {
- font-weight: normal;
  position: absolute;
  pointer-events: none;
  left: 10px;
- top: -22px;
+ top: -24px;
  transition: .2s ease all;
  -moz-transition: .2s ease all;
  -webkit-transition: .2s ease all

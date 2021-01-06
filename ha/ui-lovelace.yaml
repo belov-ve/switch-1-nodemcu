@@ -1,0 +1,34 @@
+# title: Demonstration stand Note Assistant
+
+views:
+
+####### Demo ##########
+  - title: Demo
+    path: demo
+    id: demo
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: entity-button
+            name: Сушка обуви
+            entity: switch.drying_shoes_switch_1
+
+      - type: vertical-stack
+        cards:            
+          - type: entities
+            entities:
+              - entity: input_boolean.demo_drying_time_control
+                name: Ограничивать время сушки
+              - entity: input_select.demo_drying_time
+                name: Не более (в часах)
+              - entity: input_datetime.demo_drying_time_enabled
+                name: Последнее включение
+          - type: history-graph
+            title: Время работы сушки
+            hours_to_show: 24
+            refresh_interval: 30
+            entities:
+              - switch.drying_shoes_switch_1
+
+
+

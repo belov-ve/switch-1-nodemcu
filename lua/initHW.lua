@@ -72,44 +72,45 @@ do
                     return
                 end
 
-                    if last and lastlev and (lastlev == level) then
-                        -- print("....Button chatter")
-                        if count > 1 then lastlev = nil end
-                        return      -- дребезг
+--
+                if last and lastlev and (lastlev == level) then
+                    -- print("....Button chatter")
+                    if count > 1 then lastlev = nil end
+                    return      -- дребезг
+                end
+
+                lastlev = level
+                if not last then last = when end
+
+                if level == 0 then  -- нажатие btn
+
+                    last = when
+
+                -- При нажатии кнопки
+                    if Switch[n] and Config.switch[n].change and Config.switch[n].change == 'down' then
+                        shortPressBtn()
                     end
 
-                    lastlev = level
-                    if not last then last = when end
+                elseif level == 1 then -- отпускание btn
+                    local _t = (when - last)/1000000
+                    -- print("Time press: ".._t.." sec.")
 
-                    if level == 0 then  -- нажатие btn
-
-                        last = when
-
-                    -- При нажатии кнопки
-                        if Switch[n] and Config.switch[n].change and Config.switch[n].change == 'down' then
+                    if when - last < pressLongTime then
+                        -- При отпускании кнопки (по умолчанию)
+                        if Switch[n] and (not Config.switch[n].change or Config.switch[n].change == 'up') then
                             shortPressBtn()
                         end
 
-                    elseif level == 1 then -- отпускание btn
-                        local _t = (when - last)/1000000
-                        -- print("Time press: ".._t.." sec.")
-
-                        if when - last < pressLongTime then
-                            -- При отпускании кнопки (по умолчанию)
-                            if Switch[n] and (not Config.switch[n].change or Config.switch[n].change == 'up') then
-                                shortPressBtn()
-                            end
-
-                            return
-                        end
-
-                        -- Тут можно разместить код обслуживания длительного нажатия
-                        do
-                            -- print("!!! Long press....reload")
-                            node.restart()
-                        end
-                        --
+                        return
                     end
+
+                    -- Тут можно разместить код обслуживания длительного нажатия
+                    do
+                        -- print("!!! Long press....reload")
+                        node.restart()
+                    end
+                    --
+                end
 
             end
         end
