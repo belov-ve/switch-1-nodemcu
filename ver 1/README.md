@@ -10,12 +10,16 @@ Switch 1 relay on NodeMCU platform (Lua). Version 1
     \ha\ui-lovelace.yaml - sample form UI (for ui-lovelace.yaml)
     \ha\packages\drying_shoes.yaml - sample integration into HA in the form of packages 
 ### Note
-    1) All files \ *.lc, \init.lua and \web\*.* copied to the root of the ESP module
-    2) Copy \ha\packages\drying_shoes.yaml into packages of Home Assistant. Set the required sensor name
-    3) Insert lines from \ha\ui-lovelace.yaml into ui-lovelace.yaml (also set the required sensor name)
----
+    1. All files \ *.lc, \init.lua and \web\*.* copied to the root of the ESP module
+       Or:
+       - copy \lua\*.lua files, compile them into bytecode, delete the sources *.lua;
+       - copy files \web\lua\*.lua, compile them into bytecode, rename them to * .lch, delete the sources *.lua.
+    2. Copy \ha\packages\drying_shoes.yaml into packages of Home Assistant. Set the required sensor name
+    3. Insert lines from \ha\ui-lovelace.yaml into ui-lovelace.yaml (also set the required sensor name)
 ### Integration in Home Assistant
     Sample data integration in HA friendly name set in 'drying_shoes' and node.chip_id equal '6120123'
+---
+## Sample MQTT Topics:
 #### MQTT Topic: homeassistant/switch/drying_shoes/switch_1/config
     {
         "icon": "mdi:tumble-dryer",
@@ -35,8 +39,7 @@ Switch 1 relay on NodeMCU platform (Lua). Version 1
             "manufacturer": "BVE"
         },
         "availability_topic": "nodemcu/drying_shoes/lwt"
-    }
-    
+    }    
 #### MQTT Topic: homeassistant/sensor/drying_shoes/linkquality/config
     {
         "icon": "mdi:signal",
