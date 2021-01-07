@@ -40,7 +40,7 @@ drying_shoes_1:
         to: 'on'
       action:
         - service: input_datetime.set_datetime
-          entity_id: input_datetime.drying_time_enabled
+          entity_id: input_datetime.demo_drying_time_enabled
           data_template:
             datetime: "{{ now() }}"
 
