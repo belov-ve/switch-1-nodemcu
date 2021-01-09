@@ -30,7 +30,7 @@ Switch 1 relay on NodeMCU platform (Lua). Version 1
         "state_topic": "nodemcu/drying_shoes",
         "json_attributes_topic": "nodemcu/drying_shoes",
         "name": "drying_shoes_switch_1",
-        "unique_id": "ESP-6120123_switch_1 ",
+        "unique_id": "ESP-6120123_switch_1",
         "device": {
             "identifiers": [ "ESP-6120123" ],
             "name": "ESP-6120123",
