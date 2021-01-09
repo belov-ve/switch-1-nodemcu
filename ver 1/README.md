@@ -58,7 +58,8 @@ Switch 1 relay on NodeMCU platform (Lua). Version 1
         },
         "availability_topic": "nodemcu/drying_shoes/lwt"
     }
-#### MQTT Topic: nodemcu/drying_shoes/switch/1/set
+
+#### MQTT Topic: nodemcu/drying_shoes
     {
         "type":"device_announced",
         "name":"ESP-6120123",
@@ -67,3 +68,7 @@ Switch 1 relay on NodeMCU platform (Lua). Version 1
         "friendly_name":"Drying_Shoes",
         "ip":"192.168.xxx.xxx"
     }
+#### MQTT Topic: nodemcu/drying_shoes/switch/1/set
+    ON or OFF
+#### MQTT Topic: nodemcu/drying_shoes/lwt
+    online or offline
