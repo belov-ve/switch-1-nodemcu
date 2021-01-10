@@ -17,10 +17,10 @@ Switch 1 relay on NodeMCU platform (Lua). Version 1
     2. Copy \ha\packages\drying_shoes.yaml into packages of Home Assistant. Set the required sensor name
     3. Insert lines from \ha\ui-lovelace.yaml into ui-lovelace.yaml (also set the required sensor name)
 ### Integration in Home Assistant
-    Sample data integration in HA friendly name set in 'drying_shoes' and node.chip_id equal '6120123'
+    Sample data integration in HA friendly name set in 'Drying_Shoes' and node.chip_id equal '6120123'
 ---
 ## Sample MQTT Topics:
-#### MQTT Topic: homeassistant/switch/drying_shoes/switch_1/config
+#### MQTT Topic: homeassistant/switch/Drying_Shoes/switch_1/config
     {
         "icon": "mdi:tumble-dryer",
         "payload_off": "OFF",
@@ -40,7 +40,7 @@ Switch 1 relay on NodeMCU platform (Lua). Version 1
         },
         "availability_topic": "nodemcu/drying_shoes/lwt"
     }    
-#### MQTT Topic: homeassistant/sensor/drying_shoes/linkquality/config
+#### MQTT Topic: homeassistant/sensor/Drying_Shoes/linkquality/config
     {
         "icon": "mdi:signal",
         "unit_of_measurement": "lqi",
