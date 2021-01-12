@@ -1,6 +1,6 @@
 --[[
  Кнопки и индикаторы управления
- ver 1.0.1
+ ver 1.0.2
 --]]
 
 do
@@ -53,12 +53,15 @@ do
 
                 -- Функция обработки короткого нажатия кнопки
                 local function shortPressBtn()
-                    -- переключаем реле
                     if Switch[n] then
                         local data = (gpio.read(Switch[n].pin) == Switch[n].on) and Switch[n].off or Switch[n].on
-                        gpio.write(Switch[n].pin, data)
 
                         -- сохранить конфиг
+                        -- Пояснение:
+                        --  Сначала сохраняем новый конфиг, на случай сбоя ESP-8266 при переключении реле (ЭМИ),
+                        --  это позволяем избавиться от возможного разрушения файла кофигурации при записи.
+                        --  Недостаток - появилась задержка на реакцию от кнопки. 
+                        --  Если коммутация слаботочки или "правильная" разводка, то сохранение переключение можно поменять местами
                         Config.switch[n].state = data == Switch[n].on and "on" or "off"
 
                         local fl = file.open(Conf_file, "w+")
@@ -66,6 +69,9 @@ do
                             fl:write(sjson.encode(Config))
                             fl:close();
                         end
+
+                        -- переключаем реле
+                        gpio.write(Switch[n].pin, data)
                     end
 
                     CF.doluafile("publishMQTT")        -- публикация state устройства
