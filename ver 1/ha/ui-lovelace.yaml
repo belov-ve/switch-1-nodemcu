@@ -23,12 +23,12 @@ views:
                 name: Не более (в часах)
               - entity: input_datetime.demo_drying_time_enabled
                 name: Последнее включение
-          - type: history-graph
-            title: Время работы сушки
-            hours_to_show: 24
-            refresh_interval: 30
-            entities:
-              - switch.drying_shoes_switch_1
+#          - type: history-graph
+#            title: Время работы сушки
+#            hours_to_show: 24
+#            refresh_interval: 30
+#            entities:
+#              - switch.drying_shoes_switch_1
 
 
 
