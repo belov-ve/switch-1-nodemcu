@@ -13,7 +13,7 @@ do
     elseif Config and Config.mode == "st" then
 
         CF.doluafile("loadNodeAsST")    -- загрузка в рижиме ST
-        сCF.doluafile("initMQTT")        -- загрузка конфигурации MQTT брокера
+        CF.doluafile("initMQTT")        -- загрузка конфигурации MQTT брокера
 
     -- else
         -- print("The configuration is not loaded. WIFI launch skipped")

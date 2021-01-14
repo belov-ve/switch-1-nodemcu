@@ -8,12 +8,12 @@
 Conf_file = "esp.cfg"         -- имя файла конфигурации
 Config = {}                     -- глобальный массив параметров конфигурации
 Model = "NodeMCU WiFi Switch (1 relay)"
-ModelVersion = "ver:1.0"
+ModelVersion = "ver:1.2"
 ModelManufacturer = "BVE"
 
 
 do
-    local friendly_name = "Drying Shoes"
+    local friendly_name = "Electric Switch"
 
     -- создание шаблонного конфиг файла
     local function createConfig(cfl)

@@ -1,12 +1,13 @@
 --[[
  Скрипт интеграции с Home Assistant
- ver 1.0
+ ver 1.1
 --]]
 
 do
 
     if Config and Config.mqtt.enable and Config.ha.enable and MQTT and Config.ha.discovery_prefix and (wifi.sta.status() == wifi.STA_GOTIP) then
 
+        local frn = string.lower( Config.friendly_name )
         -- device
         do
         ---[=[   switch
@@ -25,7 +26,7 @@ do
                         Config.mqtt.state, v, Config.mqtt.state, hw, i,
                         Config.name, Config.name, ModelVersion, CF.mgsub(Model, "#*/\"","--__"), ModelManufacturer)
 
-                    local confTopic = string.format("homeassistant/%s/%s/%s_%s/config", hw, Config.friendly_name, hw, i)
+                    local confTopic = string.format("%s/%s/%s/%s_%s/config", Config.ha.discovery_prefix, hw, frn, hw, i)
                     MQTT:publish(confTopic, data, QoS, 1)
                 end
 
@@ -47,7 +48,7 @@ do
                 Config.mqtt.lwt, Config.mqtt.state, Config.mqtt.state, lq,
                 Config.name, Config.name, ModelVersion, CF.mgsub(Model, "#*/\"","--__"), ModelManufacturer)
 
-            local confTopic = string.format("homeassistant/sensor/%s/%s/config", Config.friendly_name, lq)
+            local confTopic = string.format("%s/sensor/%s/%s/config", Config.ha.discovery_prefix, frn, lq)
             MQTT:publish(confTopic, data, QoS, 1)
         --]=]
         end
