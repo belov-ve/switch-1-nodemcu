@@ -1,5 +1,5 @@
 --[[
- Скрипт загрузки модуля в режиме STATION
+ сСкрипт загрузки модуля в режиме STATION
  ver 1.2
 --]]
 -- print("Load module in STATION mode")
