@@ -34,8 +34,8 @@ do
             if file.open(sfl, "w+") then
                 file.write(sj)
                 file.close()
-            else
-                print("Error save new state file")
+            -- else
+            --     print("Error save new state file")
             end
         end
         return state
@@ -67,7 +67,7 @@ do
     end
 
     if not stsf then
-        print("No valid state file found. Create new")
+        -- print("No valid state file found. Create new")
         State = createState(State_file)    -- сохранение в файл конфигурации по умолчанию
     end
 
