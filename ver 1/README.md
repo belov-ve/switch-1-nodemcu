@@ -17,19 +17,19 @@ Switch 1 relay on NodeMCU platform (Lua). Version 1
     2. Copy \ha\packages\drying_shoes.yaml into packages of Home Assistant. Set the required sensor name
     3. Insert lines from \ha\ui-lovelace.yaml into ui-lovelace.yaml (also set the required sensor name)
 ### Integration in Home Assistant
-    Sample data integration in HA friendly name set in 'Drying_Shoes' and node.chip_id equal '6120123'
+    Sample data integration in HA friendly name set in 'Electric Switch' and node.chip_id equal '6120123'
 ---
 ## Sample MQTT Topics:
-#### MQTT Topic: homeassistant/switch/Drying_Shoes/switch_1/config
+#### MQTT Topic: homeassistant/switch/electric_switch/switch_1/config
     {
         "icon": "mdi:tumble-dryer",
         "payload_off": "OFF",
         "payload_on": "ON",
         "value_template": "{{ value_json.switch_1 }}",
-        "command_topic": "nodemcu/drying_shoes/switch/1/set",
-        "state_topic": "nodemcu/drying_shoes",
-        "json_attributes_topic": "nodemcu/drying_shoes",
-        "name": "drying_shoes_switch_1",
+        "command_topic": "nodemcu/electric_switch/switch/1/set",
+        "state_topic": "nodemcu/electric_switch",
+        "json_attributes_topic": "nodemcu/electric_switch",
+        "name": "electric_switch_switch_1",
         "unique_id": "ESP-6120123_switch_1",
         "device": {
             "identifiers": [ "ESP-6120123" ],
@@ -38,16 +38,16 @@ Switch 1 relay on NodeMCU platform (Lua). Version 1
             "model": "NodeMCU WiFi Switch (1 relay)",
             "manufacturer": "BVE"
         },
-        "availability_topic": "nodemcu/drying_shoes/lwt"
+        "availability_topic": "nodemcu/electric_switch/lwt"
     }    
-#### MQTT Topic: homeassistant/sensor/Drying_Shoes/linkquality/config
+#### MQTT Topic: homeassistant/sensor/electric_switch/linkquality/config
     {
         "icon": "mdi:signal",
         "unit_of_measurement": "lqi",
         "value_template": "{{ value_json.linkquality }}",
-        "state_topic": "nodemcu/drying_shoes",
-        "json_attributes_topic": "nodemcu/drying_shoes",
-        "name": "drying_shoes_linkquality",
+        "state_topic": "nodemcu/electric_switch",
+        "json_attributes_topic": "nodemcu/electric_switch",
+        "name": "electric_switch_linkquality",
         "unique_id": "ESP-6120123_linkquality",
         "device": {
             "identifiers": [ "ESP-6120123" ],
@@ -56,19 +56,19 @@ Switch 1 relay on NodeMCU platform (Lua). Version 1
             "model": "NodeMCU WiFi Switch (1 relay)",
             "manufacturer": "BVE"
         },
-        "availability_topic": "nodemcu/drying_shoes/lwt"
+        "availability_topic": "nodemcu/electric_switch/lwt"
     }
 
-#### MQTT Topic: nodemcu/drying_shoes
+#### MQTT Topic: nodemcu/electric_switch
     {
         "type":"device_announced",
         "name":"ESP-6120123",
         "switch_1":"ON",
         "linkquality":63,
-        "friendly_name":"Drying_Shoes",
+        "friendly_name":"electric_switch",
         "ip":"192.168.xxx.xxx"
     }
-#### MQTT Topic: nodemcu/drying_shoes/switch/1/set
+#### MQTT Topic: nodemcu/electric_switch/switch/1/set
     ON or OFF
-#### MQTT Topic: nodemcu/drying_shoes/lwt
+#### MQTT Topic: nodemcu/electric_switch/lwt
     online or offline
