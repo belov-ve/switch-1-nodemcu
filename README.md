@@ -2,11 +2,25 @@
 Switch 1 relay on NodeMCU platform (Lua)
 ---
 
-### How to download the project:<br>
+### How to download the project:
+    Download all project:
     # cd existing_folder
     # git init
     # git remote add origin git://github.com/belov-ve/switch-1-nodemcu
     # git pull origin master
+    
+    Or download single version (branch):
+    # git init
+    # git remote add origin git://github.com/belov-ve/switch-1-nodemcu
+    # git fetch
+        then choose the desired brunch
+        or re-get the list branch:
+        # git branch -a
+    # git clone -b ver_2 --single-branch git://github.com/belov-ve/switch-1-nodemcu
+    
+    Or 
+    1. Select the required version from branches
+    2. Download project from "Code" menu
 
 ### Directory structure:
     \firmware\* - NodeMCU custom build
