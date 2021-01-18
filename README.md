@@ -1,6 +1,13 @@
 # switch-1-nodemcu
 Switch 1 relay on NodeMCU platform (Lua)
 ---
+
+### How to download the project:<br>
+    # cd existing_folder
+    # git init
+    # git remote add origin git://github.com/belov-ve/switch-1-nodemcu
+    # git pull origin master
+
 ### Directory structure:
     \firmware\* - NodeMCU custom build
     \schematic\* - electric scheme
