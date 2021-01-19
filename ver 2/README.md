@@ -1,5 +1,5 @@
-# switch-1-nodemcu ver 1
-Switch 1 relay on NodeMCU platform (Lua). Version 1
+# switch-1-nodemcu ver 2
+Switch 1 relay on NodeMCU platform (Lua). Version 2
 ---
 ### Directory structure:
     \*.lc - lua bytecode file (for esp8266 1Mb)

@@ -1,6 +1,6 @@
 --[[
- Кнопки и индикаторы управления
- ver 1.0.2
+ Инициализация переключателей, кнопок и индикаторов управления
+ ver 2.0
 --]]
 
 do
@@ -20,11 +20,11 @@ do
             gpio.mode(val.pin, val.mode)
 
             local _state
-            if Config and Config.switch and Config.switch[i] then
+            if State and State.switch[i] and Config and Config.switch and Config.switch[i] then
                 if (Config.switch[i].default ~= "last") then    -- default может {"on", "off", "last"}
-                    Config.switch[i].state = Config.switch[i].default
+                    State.switch[i] = Config.switch[i].default
                 end
-                _state = Config.switch[i].state == "on"
+                _state = State.switch[i] == "on"
             end
             gpio.write(val.pin, _state and val.on or val.off)
         end
@@ -56,17 +56,17 @@ do
                     if Switch[n] then
                         local data = (gpio.read(Switch[n].pin) == Switch[n].on) and Switch[n].off or Switch[n].on
 
-                        -- сохранить конфиг
+                        -- сохранить статус
                         -- Пояснение:
-                        --  Сначала сохраняем новый конфиг, на случай сбоя ESP-8266 при переключении реле (ЭМИ),
-                        --  это позволяем избавиться от возможного разрушения файла кофигурации при записи.
-                        --  Недостаток - появилась задержка на реакцию от кнопки. 
+                        --  Сначала сохраняем новый статус, на случай сбоя ESP-8266 при переключении реле (ЭМИ),
+                        --  это позволяем избавиться от возможного разрушения файла статуса при записи.
+                        --  Недостаток - появилась задержка на реакцию от кнопки.
                         --  Если коммутация слаботочки или "правильная" разводка, то сохранение переключение можно поменять местами
-                        Config.switch[n].state = data == Switch[n].on and "on" or "off"
+                        State.switch[n] = data == Switch[n].on and "on" or "off"
 
-                        local fl = file.open(Conf_file, "w+")
+                        local fl = file.open(State_file, "w+")
                         if fl then
-                            fl:write(sjson.encode(Config))
+                            fl:write(sjson.encode(State))
                             fl:close();
                         end
 

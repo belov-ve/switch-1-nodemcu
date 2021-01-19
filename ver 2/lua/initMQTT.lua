@@ -73,23 +73,27 @@ do
                             if Switch then      -- and Config.mqtt.switch
                                 local n = findInTable(Config.mqtt.switch, topic)
 
-                                if n and Switch[n] and data~=Config.switch[n].state and findInTable({"on","off"},data) then
+                                if n and Switch[n] and data~=State.switch[n] and findInTable({"on","off"},data) then
                                     -- состояние не совпадает, требуется изменить состояние
                                     needsave = true
+
+                                    -- сохранить статус
+                                    State.switch[n] = data
+
                                     -- применить для реле
                                     gpio.write(Switch[n].pin, data=="on" and Switch[n].on or Switch[n].off)
-
-                                    -- сохранить конфиг
-                                    Config.switch[n].state = data
-
-                                    CF.doluafile("publishMQTT")        -- публикация state устройства
                                 end
                             end
 
+                            -- Состояния устройства изменилось, требуется опубликовать в топик и сохранить статус
                             if needsave then
-                                local fl = file.open(Conf_file, "w+")
+                                -- Публикация состояния устройства
+                                CF.doluafile("publishMQTT")
+
+                                -- Сохранение всех изменений в файл состояния устройства
+                                local fl = file.open(State_file, "w+")
                                 if fl then
-                                    fl:write(sjson.encode(Config))
+                                    fl:write(sjson.encode(State))
                                     fl:close();
                                 end
                             end
