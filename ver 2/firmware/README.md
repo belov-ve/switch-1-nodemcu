@@ -1,6 +1,6 @@
 # firmware
 
-### nodemcu-release-12-modules-2021-01-14-06-38-30-float.bin
+### nodemcu-release-11-modules-2021-01-19-14-16-45-float.bin
 
 ##### NodeMCU 3.0.0.0 built on nodemcu-build.com provided by frightanic.com
 	branch: release
@@ -10,5 +10,5 @@
 	SSL: false
 	build type: float
 	LFS: 0x0 bytes total capacity
-	modules: crypto,dht,encoder,file,gpio,mqtt,net,node,sjson,tmr,uart,wifi
-	build 2021-01-14 06:37 powered by Lua 5.1.4 on SDK 3.0.1-dev(fce080e)
+	modules: crypto,encoder,file,gpio,mqtt,net,node,sjson,tmr,uart,wifi
+    build 2021-01-19 14:16 powered by Lua 5.1.4 on SDK 3.0.1-dev(fce080e)
