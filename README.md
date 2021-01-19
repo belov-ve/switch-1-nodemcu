@@ -25,7 +25,7 @@ Switch 1 relay on NodeMCU platform (Lua)
 ### Directory structure:
     \firmware\* - NodeMCU custom build
     \schematic\* - electric scheme
-    \ver "_"\ - release version "_"
+    \ver_"N"\ - release version "N"
 
 ### Note
     1. Prepare the hardware. See electric scheme.
