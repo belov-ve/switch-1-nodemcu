@@ -1,6 +1,6 @@
 --[[
  Скрипт публикации конфигурации в топик
- ver 2.0
+ ver 2.0.1
 --]]
 
 do
@@ -14,15 +14,14 @@ do
         if Config.model then js.model = Config.model end
         js.ip = wifi.sta.getip()
 
-        if wifi then js.linkquality =  100 + wifi.sta.getrssi() end
+        if wifi then js.linkquality = 100 + wifi.sta.getrssi() end
 
         -- switch
-        if Config.switch and type(State.switch)=="table" then
-            for i,v in pairs(Config.switch) do
-                js["switch_"..i] = string.upper( State.switch[i] )
+        if Switch and State.switch and type(State.switch)=="table" then
+            for i,v in pairs(State.switch) do
+                    js["switch_"..i] = string.upper( State.switch[i] )
             end
         end
-
 
         MQTT:publish(Config.mqtt.state, sjson.encode(js), QoS, 1)
     else
