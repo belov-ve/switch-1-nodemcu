@@ -45,27 +45,36 @@ drying_shoes_1:
             datetime: "{{ now() }}"
 
     # Отключение сушки и таймера
-    - alias: demo_stop_drying
+    - alias: stop_drying
       initial_state: 'on'
       trigger:
       - platform: time_pattern
         minutes: '/1'   # проверка каждую минуту
       - platform: state
-        entity_id: input_boolean.demo_drying_time_control
+        entity_id: input_boolean.drying_time_control
         to: 'on'
+        # тайм-аут, вдруг передумал
         for:
           seconds: 5
       condition:
       - condition: state
-        entity_id: input_boolean.demo_drying_time_control
+        entity_id: input_boolean.drying_time_control
         state: 'on'
       - condition: state
         entity_id: switch.drying_shoes_switch_1
         state: 'on'
+        # тайм-аут для ожидания смены времени включения
+        for:
+          seconds: 3
       - condition: template
-        value_template: "{{ as_timestamp(now()) - as_timestamp(states.input_datetime.demo_drying_time_enabled.state ) > states.input_select.demo_drying_time.state|int * 3600 }}"
+        value_template: >
+          {{ as_timestamp(now()) - as_timestamp(states.input_datetime.drying_time_enabled.state) > 
+            states.input_select.drying_time.state|int * 3600 or 
+            as_timestamp(now()) - as_timestamp(states.input_datetime.drying_time_enabled.state) < 0 }}
       action:
         - service: switch.turn_off
           entity_id: switch.drying_shoes_switch_1
+        - service: script.turn_on
+          entity_id: script.send_message_shoe_drying_disabled_to_family
 
 # End Demo
