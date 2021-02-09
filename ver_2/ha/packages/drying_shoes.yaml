@@ -1,21 +1,19 @@
 drying_shoes_1:
 
-
-# Demo
 # switch.drying_shoes_switch_1 - sensor drying_shoes_switch
 
   input_datetime:
-    demo_drying_time_enabled:
+    drying_time_enabled:
       name: Дата и время включения сушки
       has_date: true
       has_time: true
 
   input_boolean:
-    demo_drying_time_control:
+    drying_time_control:
       name: Контроль за временем сушки
 
   input_select:
-    demo_drying_time:
+    drying_time:
       name: Отключать сушку через (в часах)
       options:
         - 1
@@ -40,7 +38,7 @@ drying_shoes_1:
         to: 'on'
       action:
         - service: input_datetime.set_datetime
-          entity_id: input_datetime.demo_drying_time_enabled
+          entity_id: input_datetime.drying_time_enabled
           data_template:
             datetime: "{{ now() }}"
 
@@ -77,4 +75,3 @@ drying_shoes_1:
         - service: script.turn_on
           entity_id: script.send_message_shoe_drying_disabled_to_family
 
-# End Demo
