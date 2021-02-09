@@ -1,14 +1,14 @@
 --[[
  Скрипт загрузки параметров модуля из файла конфигурации
- ver 1.2
+ ver 2.0
 --]]
 
 --local cf = require "comfun"
 
-Conf_file = "esp.cfg"         -- имя файла конфигурации
-Config = {}                     -- глобальный массив параметров конфигурации
+Conf_file = "esp.cfg"       -- имя файла конфигурации
+Config = {}                 -- глобальный массив параметров конфигурации
 Model = "NodeMCU WiFi Switch (1 relay)"
-ModelVersion = "ver:1.2"
+ModelVersion = "ver:2.0"
 ModelManufacturer = "BVE"
 
 
@@ -24,7 +24,6 @@ do
             "switch" : [
                 {
                     "default" : "last",
-                    "state" : "off",
                     "change" : "up",
                     "icon" : "mdi:electric-switch"
                 }
@@ -96,23 +95,23 @@ do
     end
 
     -- очистка пустых полей config
-    local function clearConfig(obj)
-        for k,v in pairs(obj) do        -- очищаем пустые параметры
+    local function clearJson(obj)
+        for k,v in pairs(obj) do                    -- перебираем объекты
             if type(v) == "table" then
-                clearConfig(v)
+                clearJson(v)
             elseif type(v) == "string" then
-                obj[k] = v~="" and obj[k] or nil
+                obj[k] = v~="" and obj[k] or nil    -- очищаем пустые параметры
             end
         end
     end
 
 
-
-    local state
+------------------
+    local stcf
     if file.exists(Conf_file) then
         local fl = file.open(Conf_file, "r")
         if fl then
-            state = pcall( function ()
+            stcf = pcall( function ()
                 local sj = fl:read()
                 fl:close()
                 Config = sjson.decode(sj)
@@ -120,7 +119,7 @@ do
         end
     end
 
-    if not state then
+    if not stcf then
         --print("No valid configuration file found. Create new")
         Config = createConfig(Conf_file)    -- сохранение в файл конфигурации по умолчанию
 
@@ -128,6 +127,6 @@ do
         Config.mode = "ap"   --  первый запуск загружаем в режиме "ap"
     end
 
-    clearConfig(Config)
+    clearJson(Config)
 
 end
