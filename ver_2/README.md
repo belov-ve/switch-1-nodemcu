@@ -34,7 +34,7 @@ Switch 1 relay on NodeMCU platform (Lua). Version 2
         "device": {
             "identifiers": [ "ESP-6120123" ],
             "name": "ESP-6120123",
-            "sw_version": "ver:1.0",
+            "sw_version": "ver:2.0",
             "model": "NodeMCU WiFi Switch (1 relay)",
             "manufacturer": "BVE"
         },
@@ -52,7 +52,7 @@ Switch 1 relay on NodeMCU platform (Lua). Version 2
         "device": {
             "identifiers": [ "ESP-6120123" ],
             "name": "ESP-6120123",
-            "sw_version": "ver:1.0",
+            "sw_version": "ver:2.0",
             "model": "NodeMCU WiFi Switch (1 relay)",
             "manufacturer": "BVE"
         },
