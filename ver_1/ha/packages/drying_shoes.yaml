@@ -1,7 +1,5 @@
 drying_shoes_1:
 
-
-# Demo
 # switch.drying_shoes_switch_1 - sensor drying_shoes_switch
 
   input_datetime:
@@ -77,4 +75,3 @@ drying_shoes_1:
         - service: script.turn_on
           entity_id: script.send_message_shoe_drying_disabled_to_family
           
-# End Demo
