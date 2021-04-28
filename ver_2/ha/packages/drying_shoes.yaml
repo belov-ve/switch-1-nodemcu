@@ -42,6 +42,7 @@ drying_shoes_1:
           data_template:
             datetime: "{{ now() }}"
 
+
     - id: stop_drying
       alias: Отключение сушки и таймера
       initial_state: 'on'
