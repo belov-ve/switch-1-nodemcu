@@ -29,7 +29,7 @@ drying_shoes_1:
   automation:
 
     - id: start_drying_time
-      alias: Сохранение времени включения
+      alias: Сохранение времени включения сушки
       initial_state: 'on'
       trigger:
       - platform: state
@@ -44,7 +44,7 @@ drying_shoes_1:
 
 
     - id: stop_drying
-      alias: Отключение сушки и таймера
+      alias: Отключение сушки
       initial_state: 'on'
       trigger:
       - platform: time_pattern
